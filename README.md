@@ -1,5 +1,5 @@
-<center><h1>Orb Weaver</h1></center>
-<center>Google News RSS made simple and easy.</center>
+<h1 align="center">Orb Weaver</h1>
+<p align="center">Google News RSS made simple and easy.</p>
 
 <hr>
 
