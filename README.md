@@ -3,6 +3,15 @@
 
 <hr>
 
+<p align="center">
+<a href="https://github.com/ivanbogaeb/OrbWeaver/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/ivanbogaeb/OrbWeaver"></a>
+<a href="https://github.com/ivanbogaeb/OrbWeaver/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/ivanbogaeb/OrbWeaver"></a>
+<a href="https://github.com/ivanbogaeb/OrbWeaver/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/ivanbogaeb/OrbWeaver"></a>
+<a href="https://github.com/ivanbogaeb/OrbWeaver/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/ivanbogaeb/OrbWeaver"></a>
+</p>
+
+<br>
+
 ## What is Orb Weaver?
 
 Orb Weaver is an all-in-one tool to extract Google News RSS, get source links and also images for your own news personal project.
