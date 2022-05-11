@@ -3,13 +3,11 @@
 
 <hr>
 
-#### What is Orb Weaver?
+## What is Orb Weaver?
 
 Orb Weaver is an all-in-one tool to extract Google News RSS, get source links and also images for your own news personal project.
 
-##
-
-#### Features:
+## Features:
 
 - Headlines.
 - Geolocation.
@@ -19,15 +17,11 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 - Cover images.
 - Sources.
 
-##
-
-#### Installation:
+## Installation:
 
 > Package not uploaded yet. You can download the distribution and import it.
 
-##
-
-#### Usage:
+## Usage:
 
 ```javascript
     const {orbWeaver} = require('./orbWeaver/dist/orbWeaver'); // This will change
@@ -63,9 +57,7 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 
 > You can run multiple Orb Weavers at the same time, but keep in mind it's CPU and RAM usage.
 
-##
-
-#### Expected output:
+## Expected output:
 
 > `weaver.topic()` / `weaver.headlines()` / `weaver.geo()` / `weaver.search()`
 ```javascript
@@ -129,26 +121,18 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
     };
 ```
 
-##
-
-#### Things to consider:
+## Things to consider:
 - Language codenames and countries are based on the [ISO 2 Letter (Alpha-2 code, ISO 639-1)](http://www.loc.gov/standards/iso639-1/) and [ISO 3 Letter (Alpha-3 code, ISO 639-2)](http://www.loc.gov/standards/iso639-2/) Standard Codes for the Representation of Names of Languages.
 - The country is tied to the language you select, so look up for it with `getLangCountryMap()` function.
 - Google News only returns articles that were written in the language and country you selected. If you are looking for Japanese news in English for example, you will get articles written in English, but not translated native news.
 
-##
-
-#### Changelog:
+## Changelog:
 - 11 May 2022 - First Release - Version 1.0
 
-##
-
-#### Credits:
+## Credits:
 
 - Brought to you thanks to **[TypeScript](https://www.typescriptlang.org/)**, **[Cheerio](https://cheerio.js.org/)**, **[Puppeteer](https://pptr.dev/)** and **[RSS-Parser](https://github.com/prof18/RSS-Parser)**.
 - Inspired by **[google-news-js](https://github.com/DatanewsOrg/google-news-js)**.
 
-##
-
-#### License:
+## License:
 **[CC0 1.0 Universal](./LICENSE)**
