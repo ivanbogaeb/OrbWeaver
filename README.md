@@ -59,7 +59,7 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 
 ## Expected output:
 
-> `**weaver.topic()**` / `**weaver.headlines()**` / `**weaver.geo()**` / `**weaver.search()**`
+> **`weaver.topic()`** / **`weaver.headlines()`** / **`weaver.geo()`** / **`weaver.search()`**
 ```javascript
 
     /* Successful output */
@@ -87,13 +87,13 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
     [] // Array or failed property will be empty
 ```
 
-> `**weaver.getTopics()**`
+> **`weaver.getTopics()`**
 ```javascript
     /* Successful output */
     ['World', 'Nation', 'Business', 'Technology', 'Entertainment', 'Sports', 'Science', 'Health'];
 ```
 
-> `**weaver.getLangCountryMap()**`
+> **`weaver.getLangCountryMap()`**
 ```javascript
     /* Successful output */
     {
