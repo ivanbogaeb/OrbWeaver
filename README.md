@@ -36,7 +36,7 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 ## Usage:
 
 ```javascript
-const {orbWeaver} = require('../dist/orbweaver');
+const {orbWeaver} = require('@ivanbogaeb/orbweaver');
 /* import {orbWeaver} from '@ivanbogaeb/orbweaver'; */ // You can import the package the way you want!
 
 let weaver = new orbWeaver(); // Initialize
