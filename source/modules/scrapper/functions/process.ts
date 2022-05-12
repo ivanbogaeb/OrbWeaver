@@ -27,7 +27,7 @@ export const pageProcess = async (query:string, page:Page, cheerio:CheerioAPI, r
         let imageURL:string|undefined = '';
         let articleURL:string|undefined = '';
 
-        verbose && console.log(`[+] - Looking for article: ${query}`);
+        verbose && console.log(`\n[+] - Looking for article: ${query}`);
         
         await page.goto(`https://www.google.com.ar/search?q=${encodeURIComponent(query)}&tbm=isch`);
 
@@ -54,19 +54,15 @@ export const pageProcess = async (query:string, page:Page, cheerio:CheerioAPI, r
                                 if (!imageURL){
                                     imageURL = '';
                                 };
-                            }
+                            };
+                            attempts = 30;
                         };
                     });
                 } else {
                     imageURL = '';
                 }
             });
-        } while(imageURL === '' && attempts <= 30); // 30 seconds considering your internet is slow af
-
-        if (attempts >= 30){
-            console.log("There has been an error connecting to the internet or we didn't find the article information you needed, please try again later.");
-            throw new Error("There has been an error connecting to internet, please try again later.");
-        };
+        } while(attempts < 30); // 30 seconds considering your internet is slow af or google doesn't want you to get the image data
 
         if (imageURL.includes('https')){
             await base64Image(imageURL).then(

@@ -15,42 +15,45 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.request = void 0;
 const rss_parser_1 = __importDefault(require("rss-parser"));
 const parser = new rss_parser_1.default();
-const request = (URL, cheerio, extractURLs) => __awaiter(void 0, void 0, void 0, function* () {
+const request = (URL, cheerio, amount) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         let articles = new Array();
         let { items } = yield parser.parseURL(URL);
-        items.forEach(({ title, link, pubDate, content }) => __awaiter(void 0, void 0, void 0, function* () {
-            const article = {
-                title: '',
-                origin: '',
-                link: '',
-                pubDate: '',
-                image: '',
-                related: [{
-                        title: '',
-                        url: ''
-                    }]
-            };
-            if (title) {
-                article.title = title.slice(0, title.lastIndexOf('-') - 1);
-                article.origin = (title.slice(title.lastIndexOf('-') + 2)).trim();
-                if (link) {
-                    article.link = link;
-                }
-                ;
-                if (pubDate) {
-                    article.pubDate = pubDate;
-                }
-                ;
-                if (content) {
-                    let $ = cheerio.load(content);
-                    article.related.pop();
-                    $('a').get().map(({ children }) => {
-                        article.related.push({ title: $(children).text(), url: children[0].parent.attribs.href });
-                    });
-                    article.related.shift();
-                    article.related.pop();
-                    articles.push(article);
+        items.forEach(({ title, link, pubDate, content }, index) => __awaiter(void 0, void 0, void 0, function* () {
+            if (index < amount) {
+                const article = {
+                    title: '',
+                    origin: '',
+                    link: '',
+                    pubDate: '',
+                    image: '',
+                    related: [{
+                            title: '',
+                            url: ''
+                        }]
+                };
+                if (title) {
+                    article.title = title.slice(0, title.lastIndexOf('-') - 1);
+                    article.origin = (title.slice(title.lastIndexOf('-') + 2)).trim();
+                    if (link) {
+                        article.link = link;
+                    }
+                    ;
+                    if (pubDate) {
+                        article.pubDate = pubDate;
+                    }
+                    ;
+                    if (content) {
+                        let $ = cheerio.load(content);
+                        article.related.pop();
+                        $('a').get().map(({ children }) => {
+                            article.related.push({ title: $(children).text(), url: children[0].parent.attribs.href });
+                        });
+                        article.related.shift();
+                        article.related.pop();
+                        articles.push(article);
+                    }
+                    ;
                 }
                 ;
             }

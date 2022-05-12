@@ -8,8 +8,9 @@ export class Articles {
         language: string, 
         images: boolean, 
         extractURLs: boolean,
-        verbose: boolean
-    ) => Promise<any> | [];
+        verbose: boolean,
+        amount: number,
+    ) => Promise<any> | Error;
 
     search: (
         query: string, 
@@ -17,8 +18,9 @@ export class Articles {
         language: string, 
         images: boolean, 
         extractURLs: boolean,
-        verbose: boolean
-    ) => Promise<any> | [];
+        verbose: boolean,
+        amount: number,
+    ) => Promise<any> | Error;
 
     topic: (
         topic: string, 
@@ -26,16 +28,18 @@ export class Articles {
         language: string, 
         images: boolean, 
         extractURLs: boolean,
-        verbose: boolean
-    ) => Promise<any> | {error: string};
+        verbose: boolean,
+        amount: number,
+    ) => Promise<any> | Error;
 
     headlines: (
         location: string, 
         language: string, 
         images: boolean, 
         extractURLs: boolean,
-        verbose: boolean
-    ) => Promise<any> | [];
+        verbose: boolean,
+        amount: number,
+    ) => Promise<any> | Error;
 
     constructor(){
         const {parameters} = require('./functions/parameters');
@@ -50,27 +54,39 @@ export class Articles {
             headlines: 'https://news.google.com/rss',
         };
         
-        const request = (url:string, component:string, location:string, language:string, images:boolean, extractURLs:boolean, verbose: boolean) => {
+        const request = (url:string, component:string, location:string, language:string, images:boolean, extractURLs:boolean, verbose: boolean, amount:number) => {
             let requestURL = url.concat(encodeURIComponent(component), parameters(location, language));
-            return scrapper(requestURL, images, extractURLs, verbose);
+            return scrapper(requestURL, images, extractURLs, verbose, amount);
         };
 
-        this.geo = (city, location, language, images, extractURLs, verbose) => {
-            return request(type.geo, city, location, language, images, extractURLs, verbose);
-        };
-        this.search = (query, location, language, images, extractURLs, verbose) => {
-            return request(type.search, query, location, language, images, extractURLs, verbose);
-        };
-        this.topic = (topic, location, language, images, extractURLs, verbose) => {
-            let index = topicsRaw.findIndex(element => element == topic.toUpperCase());
-            if (index){
-                return request(type.topics, topics[index], location, language, images, extractURLs, verbose);
+        this.geo = (city, location, language, images, extractURLs, verbose, amount) => {
+            if (typeof city === 'string'){
+                return request(type.geo, city, location, language, images, extractURLs, verbose, amount);
             } else {
-              return {error: `You can only choose between these topics: ${topicsRaw}`};
+                throw new Error('Your city is not defined.');
             };
         };
-        this.headlines = (location, language, images, extractURLs, verbose) => {
-            return request(type.headlines, '', location, language, images, extractURLs, verbose);
+        this.search = (query, location, language, images, extractURLs, verbose, amount) => {
+            if (typeof query === 'string'){
+                return request(type.search, query, location, language, images, extractURLs, verbose, amount);
+            } else {
+                throw new Error('Your search query is not defined.');
+            };
+        };
+        this.topic = (topic, location, language, images, extractURLs, verbose, amount) => {
+            let index = topicsRaw.findIndex(element => element == topic.toUpperCase());
+            if (index > -1){
+                return request(type.topics, topics[index], location, language, images, extractURLs, verbose, amount);
+            } else {
+                throw new Error('Your topic is not defined correctly, you should use:\nWorld, Nation, Business, Technology, Entertainment, Sports, Science, Health\n');
+            };
+        };
+        this.headlines = (location, language, images, extractURLs, verbose, amount) => {
+            if(typeof amount === 'number'){
+                return request(type.headlines, '', location, language, images, extractURLs, verbose, amount);
+            } else {
+                throw new Error('You can only set a limited amount of articles for headlines.');
+            };
         };
     };
 };

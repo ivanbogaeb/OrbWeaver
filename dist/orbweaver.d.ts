@@ -11,10 +11,10 @@
     weaver.extractURLs = true | false;
     weaver.verbose = true | false;
 
-    let geo = await weaver.geo(city);
-    let search = await weaver.search(query);
-    let topic = await weaver.topic(topic);
-    let headlines = await weaver.headlines();
+    let geo = await weaver.geo(city, 10);
+    let search = await weaver.search(query, 20);
+    let topic = await weaver.topic(topic, 5);
+    let headlines = await weaver.headlines(10);
     
     let topicsArray = weaver.getTopics();
     let langCountryMap = weaver.getLangCountryMap();
@@ -86,7 +86,7 @@ export declare class orbWeaver {
      * let search = await weaver.topic('Technology');
      * ```
     */
-    topic: (topic: 'World' | 'Nation' | 'Business' | 'Technology' | 'Entertainment' | 'Sports' | 'Science' | 'Health') => Promise<any>;
+    topic: (topic: 'World' | 'Nation' | 'Business' | 'Technology' | 'Entertainment' | 'Sports' | 'Science' | 'Health' | '') => Promise<any>;
     /**
      * If you just want to get the most popular articles, you can just request for all headlines.
      * @example

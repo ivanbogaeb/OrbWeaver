@@ -12,10 +12,10 @@ import { Articles } from "./modules/articles/articles";
     weaver.extractURLs = true | false;
     weaver.verbose = true | false;
 
-    let geo = await weaver.geo(city);
-    let search = await weaver.search(query);
-    let topic = await weaver.topic(topic);
-    let headlines = await weaver.headlines();
+    let geo = await weaver.geo(city, 10);
+    let search = await weaver.search(query, 20);
+    let topic = await weaver.topic(topic, 5);
+    let headlines = await weaver.headlines(10);
     
     let topicsArray = weaver.getTopics();
     let langCountryMap = weaver.getLangCountryMap();
@@ -90,7 +90,7 @@ export class orbWeaver {
      * let search = await weaver.topic('Technology');
      * ```
     */
-    topic: (topic: 'World' | 'Nation' | 'Business' | 'Technology' | 'Entertainment' | 'Sports' | 'Science' | 'Health') => Promise<any>;
+    topic: (topic: 'World' | 'Nation' | 'Business' | 'Technology' | 'Entertainment' | 'Sports' | 'Science' | 'Health' | '') => Promise<any>;
     /**
      * If you just want to get the most popular articles, you can just request for all headlines.
      * @example
@@ -123,21 +123,21 @@ export class orbWeaver {
     getLangCountryMap: () => object;
 
     constructor() {
-        const langCountryMap = require('./map.json');
+        const langCountryMap = require('../map.json');
         
         const topics = ['World', 'Nation', 'Business', 'Technology', 'Entertainment', 'Sports', 'Science', 'Health'];
         const articles = new Articles();
         
-        this.location = 'AR';
-        this.language = 'es';
+        this.location = 'US';
+        this.language = 'en';
         this.images = false;
         this.extractURLs = false;
         this.verbose = false;
   
-        this.geo = async (city = 'Buenos Aires') => await articles.geo(city, this.location, this.language, this.images, this.extractURLs, this.verbose);
-        this.search = async (query = '') => await articles.search(query, this.location, this.language, this.images, this.extractURLs, this.verbose);
-        this.topic = async (topic = 'Technology') => await articles.topic(topic, this.location, this.language, this.images, this.extractURLs, this.verbose);
-        this.headlines = async () => await articles.headlines(this.location, this.language, this.images, this.extractURLs, this.verbose);
+        this.geo = async (city = '', amount = 50) => await articles.geo(city, this.location, this.language, this.images, this.extractURLs, this.verbose, amount);
+        this.search = async (query = '', amount = 50) => await articles.search(query, this.location, this.language, this.images, this.extractURLs, this.verbose, amount);
+        this.topic = async (topic = '', amount = 50) => await articles.topic(topic, this.location, this.language, this.images, this.extractURLs, this.verbose, amount);
+        this.headlines = async (amount = 50) => await articles.headlines(this.location, this.language, this.images, this.extractURLs, this.verbose, amount);
         
         this.getTopics = () => topics;
         this.getLangCountryMap = () => langCountryMap;

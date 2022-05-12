@@ -36,7 +36,7 @@ const pageProcess = (query, page, cheerio, readImage, readURL, verbose) => __awa
         let attempts = 0;
         let imageURL = '';
         let articleURL = '';
-        verbose && console.log(`[+] - Looking for article: ${query}`);
+        verbose && console.log(`\n[+] - Looking for article: ${query}`);
         yield page.goto(`https://www.google.com.ar/search?q=${encodeURIComponent(query)}&tbm=isch`);
         verbose && console.log(`    - Article information found...`);
         do {
@@ -63,6 +63,8 @@ const pageProcess = (query, page, cheerio, readImage, readURL, verbose) => __awa
                                 }
                                 ;
                             }
+                            ;
+                            attempts = 30;
                         }
                         ;
                     });
@@ -71,12 +73,7 @@ const pageProcess = (query, page, cheerio, readImage, readURL, verbose) => __awa
                     imageURL = '';
                 }
             }));
-        } while (imageURL === '' && attempts <= 30); // 30 seconds considering your internet is slow af
-        if (attempts >= 30) {
-            console.log("There has been an error connecting to the internet or we didn't find the article information you needed, please try again later.");
-            throw new Error("There has been an error connecting to internet, please try again later.");
-        }
-        ;
+        } while (attempts < 30); // 30 seconds considering your internet is slow af or google doesn't want you to get the image data
         if (imageURL.includes('https')) {
             yield base64Image(imageURL).then(function (base64) {
                 imageURL = base64;

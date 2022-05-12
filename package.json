@@ -1,13 +1,14 @@
 {
   "name": "@ivanbogaeb/orbweaver",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Google News RSS made simple and easy.",
   "main": "./dist/orbweaver.js",
   "scripts": {
     "watch": "tsc -w",
     "build": "tsc",
     "test": "jest",
-    "dev": "nodemon ./dev-test/app.js"
+    "dev": "nodemon ./dev-test/app.js",
+    "publish": "npm publish --access public"
   },
   "author": {
     "name": "Iván Bogdas Aebersold",

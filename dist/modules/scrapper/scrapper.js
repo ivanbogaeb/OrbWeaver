@@ -20,18 +20,18 @@ const process_1 = require("./functions/process");
 const timer = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
-const scrapper = (requestURL, images, extractURLs, verbose) => __awaiter(void 0, void 0, void 0, function* () {
+const scrapper = (requestURL, images, extractURLs, verbose, amount) => __awaiter(void 0, void 0, void 0, function* () {
     const browser = yield puppeteer_1.default.launch( /*{headless: false,args: ["--disable-setuid-sandbox"],}*/);
     verbose && console.log("[+] - Firing browser...");
     const page = yield browser.newPage();
     verbose && console.log("[+] - New page...");
     verbose && console.log("[+] - Loading articles...");
-    let articles = yield (0, request_1.request)(requestURL, cheerio, extractURLs);
+    let articles = yield (0, request_1.request)(requestURL, cheerio, amount);
     verbose && console.log(`[+] - News articles gathered...`);
     if (articles) {
         if (images || extractURLs) {
             for (let i = 0; i < articles.length; i++) {
-                yield timer(3000).then(() => __awaiter(void 0, void 0, void 0, function* () {
+                yield timer(5000).then(() => __awaiter(void 0, void 0, void 0, function* () {
                     let imageData = yield (0, process_1.pageProcess)(articles[i].title + ' - ' + articles[i].origin, page, cheerio, images, extractURLs, verbose);
                     if (imageData.image) {
                         articles[i].image = imageData.image;

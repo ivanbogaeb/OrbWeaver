@@ -24,10 +24,10 @@ const articles_1 = require("./modules/articles/articles");
     weaver.extractURLs = true | false;
     weaver.verbose = true | false;
 
-    let geo = await weaver.geo(city);
-    let search = await weaver.search(query);
-    let topic = await weaver.topic(topic);
-    let headlines = await weaver.headlines();
+    let geo = await weaver.geo(city, 10);
+    let search = await weaver.search(query, 20);
+    let topic = await weaver.topic(topic, 5);
+    let headlines = await weaver.headlines(10);
     
     let topicsArray = weaver.getTopics();
     let langCountryMap = weaver.getLangCountryMap();
@@ -35,18 +35,18 @@ const articles_1 = require("./modules/articles/articles");
 */
 class orbWeaver {
     constructor() {
-        const langCountryMap = require('./map.json');
+        const langCountryMap = require('../map.json');
         const topics = ['World', 'Nation', 'Business', 'Technology', 'Entertainment', 'Sports', 'Science', 'Health'];
         const articles = new articles_1.Articles();
-        this.location = 'AR';
-        this.language = 'es';
+        this.location = 'US';
+        this.language = 'en';
         this.images = false;
         this.extractURLs = false;
         this.verbose = false;
-        this.geo = (city = 'Buenos Aires') => __awaiter(this, void 0, void 0, function* () { return yield articles.geo(city, this.location, this.language, this.images, this.extractURLs, this.verbose); });
-        this.search = (query = '') => __awaiter(this, void 0, void 0, function* () { return yield articles.search(query, this.location, this.language, this.images, this.extractURLs, this.verbose); });
-        this.topic = (topic = 'Technology') => __awaiter(this, void 0, void 0, function* () { return yield articles.topic(topic, this.location, this.language, this.images, this.extractURLs, this.verbose); });
-        this.headlines = () => __awaiter(this, void 0, void 0, function* () { return yield articles.headlines(this.location, this.language, this.images, this.extractURLs, this.verbose); });
+        this.geo = (city = '', amount = 50) => __awaiter(this, void 0, void 0, function* () { return yield articles.geo(city, this.location, this.language, this.images, this.extractURLs, this.verbose, amount); });
+        this.search = (query = '', amount = 50) => __awaiter(this, void 0, void 0, function* () { return yield articles.search(query, this.location, this.language, this.images, this.extractURLs, this.verbose, amount); });
+        this.topic = (topic = '', amount = 50) => __awaiter(this, void 0, void 0, function* () { return yield articles.topic(topic, this.location, this.language, this.images, this.extractURLs, this.verbose, amount); });
+        this.headlines = (amount = 50) => __awaiter(this, void 0, void 0, function* () { return yield articles.headlines(this.location, this.language, this.images, this.extractURLs, this.verbose, amount); });
         this.getTopics = () => topics;
         this.getLangCountryMap = () => langCountryMap;
     }

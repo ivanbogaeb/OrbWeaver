@@ -25,6 +25,7 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 - Language and country.
 - Cover images.
 - Sources.
+- Amount of articles to collect.
 
 ## Installation:
 
@@ -35,15 +36,14 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 ## Usage:
 
 ```javascript
-
-    import {orbWeaver} from '@ivanbogaeb/orbweaver';
-    /* const {orbWeaver} = require('@ivanbogaeb/orbweaver'); */ // You can import the package the way you want!
+    const {orbWeaver} = require('../dist/orbweaver');
+    /* import {orbWeaver} from '@ivanbogaeb/orbweaver'; */ // You can import the package the way you want!
 
     let weaver = new orbWeaver(); // Initialize
 
     weaver.location = 'AR'; // Sets news location
     weaver.language = 'es'; // Sets news language
-    weaver.extractURL = true; // Get articles source URL
+    weaver.extractURLs = true; // Get articles source URL
     weaver.images = true; // Get base64 image for each article (Ready for img or canvas)
     weaver.verbose = true; // If you like to see how the process is done
 
@@ -51,21 +51,26 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
     console.log(weaver.getLangCountryMap()); // Returns all the available languages and countries.
 
     (async () => {
-        /* Your async function here */
-        let technology = await weaver.topic('Technology');
-        let headlines = await weaver.headlines();
-        let geolocation = await weaver.geo('New York');
-        let search = await weaver.search('Elon Musk');
-    
-        /* Error handling magic */
-        if (!technology.length){ // If the array is empty
-            console.log("No news were found");
-        };
+        try {
+            /* Your async function here */
+            let technology = await weaver.topic('Technology', 10); // Extract 10 technology articles
 
-        /* Read the data */
-        technology.forEach({title, origin, link, pubDate, image, related} => {
-            /* Do something with it */
-        })
+            weaver.images = true; // You can turn off features dynamically!
+            
+            let headlines = await weaver.headlines(5); // Get only 5 headline articles
+            let geolocation = await weaver.geo('New York'); // All the New York articles available
+            let search = await weaver.search('Elon Musk', 1); // Last Elon Musk article
+        
+            if (!technology.length){ // If the array is empty
+                console.log("No news were found");
+            };
+            /* Read the data */
+            technology.forEach(({title, origin, link, pubDate, image, related}) => {
+                /* Do what you need with the data */
+            });
+        } catch (error){ // In the case you miss something when you request articles!
+            console.log(error);
+        };
     })();
 ```
 
@@ -139,9 +144,13 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 - Language codenames and countries are based on the [ISO 2 Letter (Alpha-2 code, ISO 639-1)](http://www.loc.gov/standards/iso639-1/) and [ISO 3 Letter (Alpha-3 code, ISO 639-2)](http://www.loc.gov/standards/iso639-2/) Standard Codes for the Representation of Names of Languages.
 - The country is tied to the language you select, so look up for it with `getLangCountryMap()` function.
 - Google News only returns articles that were written in the language and country you selected. If you are looking for Japanese news in English for example, you will get articles written in English, but not translated native news.
+- The final amount of articles depends on Google. If you ask for 200 articles, you will only get the ones currently available and nothing else, not the 200.
+- Gathering the original URL or Image is a slow process, you have to be patient.
 
 ## Changelog:
-- 11 May 2022 - First Release - Version 1.0
+- 12 May 2022 - Bug fixes and improvements - Version 1.1.0
+- 11 May 2022 - First Release - Version 1.0.0
+- **[Read more...](./changelog.md)**
 
 ## Credits:
 
