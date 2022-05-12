@@ -1,19 +1,20 @@
 {
-  "name": "orbweaver",
+  "name": "@ivanbogaeb/orbweaver",
   "version": "1.0.0",
   "description": "Google News RSS made simple and easy.",
   "main": "./dist/orbweaver.js",
   "scripts": {
     "watch": "tsc -w",
+    "build": "tsc",
     "test": "jest",
-    "start": "nodemon app.js"
+    "dev": "nodemon ./dev-test/app.js"
   },
   "author": {
     "name": "Iván Bogdas Aebersold",
     "email": "ivanbogdasaebersold@live.com.ar",
     "url": "https://github.com/ivanbogaeb"
   },
-  "license": "ISC",
+  "license": "CC0-1.0",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "puppeteer": "^13.7.0",

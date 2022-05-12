@@ -1,4 +1,3 @@
-import { Articles } from "./modules/articles/articles";
 /**
 * Google News RSS made simple and easy.
 * @example
@@ -21,9 +20,7 @@ import { Articles } from "./modules/articles/articles";
     let langCountryMap = weaver.getLangCountryMap();
 * ```
 */
-
-
-export class orbWeaver {
+export declare class orbWeaver {
     /**
      * Sets up your location and from where you want to request news articles.
      * @example
@@ -66,7 +63,6 @@ export class orbWeaver {
      * ```
     */
     verbose: boolean;
-
     /**
      * Get news related to a certain location.
      * @example
@@ -121,25 +117,5 @@ export class orbWeaver {
      * It is recommended to first know the ISO 3 Letter code.
     */
     getLangCountryMap: () => object;
-
-    constructor() {
-        const langCountryMap = require('./map.json');
-        
-        const topics = ['World', 'Nation', 'Business', 'Technology', 'Entertainment', 'Sports', 'Science', 'Health'];
-        const articles = new Articles();
-        
-        this.location = 'AR';
-        this.language = 'es';
-        this.images = false;
-        this.extractURLs = false;
-        this.verbose = false;
-  
-        this.geo = async (city = 'Buenos Aires') => await articles.geo(city, this.location, this.language, this.images, this.extractURLs, this.verbose);
-        this.search = async (query = '') => await articles.search(query, this.location, this.language, this.images, this.extractURLs, this.verbose);
-        this.topic = async (topic = 'Technology') => await articles.topic(topic, this.location, this.language, this.images, this.extractURLs, this.verbose);
-        this.headlines = async () => await articles.headlines(this.location, this.language, this.images, this.extractURLs, this.verbose);
-        
-        this.getTopics = () => topics;
-        this.getLangCountryMap = () => langCountryMap;
-    };
-};
+    constructor();
+}
