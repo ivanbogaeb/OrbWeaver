@@ -1,7 +1,16 @@
-<center><h1>Orb Weaver</h1></center>
-<center>Google News RSS made simple and easy.</center>
+<h1 align="center">Orb Weaver</h1>
+<p align="center">Google News RSS made simple and easy.</p>
 
 <hr>
+
+<p align="center">
+<a href="https://github.com/ivanbogaeb/OrbWeaver/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/ivanbogaeb/OrbWeaver"></a>
+<a href="https://github.com/ivanbogaeb/OrbWeaver/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/ivanbogaeb/OrbWeaver"></a>
+<a href="https://github.com/ivanbogaeb/OrbWeaver/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/ivanbogaeb/OrbWeaver"></a>
+<a href="https://github.com/ivanbogaeb/OrbWeaver/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/ivanbogaeb/OrbWeaver"></a>
+</p>
+
+<br>
 
 ## What is Orb Weaver?
 
@@ -59,7 +68,7 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 
 ## Expected output:
 
-> `weaver.topic()` / `weaver.headlines()` / `weaver.geo()` / `weaver.search()`
+> **`weaver.topic()`** / **`weaver.headlines()`** / **`weaver.geo()`** / **`weaver.search()`**
 ```javascript
 
     /* Successful output */
@@ -87,13 +96,13 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
     [] // Array or failed property will be empty
 ```
 
-> `weaver.getTopics()`
+> **`weaver.getTopics()`**
 ```javascript
     /* Successful output */
     ['World', 'Nation', 'Business', 'Technology', 'Entertainment', 'Sports', 'Science', 'Health'];
 ```
 
-> `weaver.getLangCountryMap()`
+> **`weaver.getLangCountryMap()`**
 ```javascript
     /* Successful output */
     {
