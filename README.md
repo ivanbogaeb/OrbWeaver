@@ -55,7 +55,7 @@ console.log(weaver.getLangCountryMap()); // Returns all the available languages 
     try {
         let technology = await weaver.topic('Technology', 10); // Extract 10 technology articles
 
-        weaver.images = true; // You can turn off features dynamically!
+        weaver.images = false; // You can turn off features dynamically!
             
         let headlines = await weaver.headlines(5); // Get only 5 headline articles
         let geolocation = await weaver.geo('New York'); // All the New York articles available
