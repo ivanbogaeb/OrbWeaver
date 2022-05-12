@@ -36,42 +36,43 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 ## Usage:
 
 ```javascript
-    const {orbWeaver} = require('../dist/orbweaver');
-    /* import {orbWeaver} from '@ivanbogaeb/orbweaver'; */ // You can import the package the way you want!
+const {orbWeaver} = require('../dist/orbweaver');
+/* import {orbWeaver} from '@ivanbogaeb/orbweaver'; */ // You can import the package the way you want!
 
-    let weaver = new orbWeaver(); // Initialize
+let weaver = new orbWeaver(); // Initialize
 
-    weaver.location = 'AR'; // Sets news location
-    weaver.language = 'es'; // Sets news language
-    weaver.extractURLs = true; // Get articles source URL
-    weaver.images = true; // Get base64 image for each article (Ready for img or canvas)
-    weaver.verbose = true; // If you like to see how the process is done
+weaver.location = 'AR'; // Sets news location
+weaver.language = 'es'; // Sets news language
+weaver.extractURLs = true; // Get articles source URL
+weaver.images = true; // Get base64 image for each article (Ready for img or canvas)
+weaver.verbose = true; // If you like to see how the process is done
 
-    console.log(weaver.getTopics()); // Returns array with all available topics
-    console.log(weaver.getLangCountryMap()); // Returns all the available languages and countries.
+console.log(weaver.getTopics()); // Returns array with all available topics
+console.log(weaver.getLangCountryMap()); // Returns all the available languages and countries.
 
-    (async () => {
-        try {
-            /* Your async function here */
-            let technology = await weaver.topic('Technology', 10); // Extract 10 technology articles
+(async () => {
+    /* Your async function here */
+    try {
+        let technology = await weaver.topic('Technology', 10); // Extract 10 technology articles
 
-            weaver.images = true; // You can turn off features dynamically!
+        weaver.images = true; // You can turn off features dynamically!
             
-            let headlines = await weaver.headlines(5); // Get only 5 headline articles
-            let geolocation = await weaver.geo('New York'); // All the New York articles available
-            let search = await weaver.search('Elon Musk', 1); // Last Elon Musk article
-        
-            if (!technology.length){ // If the array is empty
-                console.log("No news were found");
-            };
-            /* Read the data */
-            technology.forEach(({title, origin, link, pubDate, image, related}) => {
-                /* Do what you need with the data */
-            });
-        } catch (error){ // In the case you miss something when you request articles!
-            console.log(error);
+        let headlines = await weaver.headlines(5); // Get only 5 headline articles
+        let geolocation = await weaver.geo('New York'); // All the New York articles available
+        let search = await weaver.search('Elon Musk', 1); // Last Elon Musk article
+     
+        if (!technology.length){ // If the array is empty
+            console.log("No news were found");
         };
-    })();
+
+        /* Read the data */
+        technology.forEach(({title, origin, link, pubDate, image, related}) => {
+            /* Do what you need with the data */
+        });
+    } catch (error){ // In the case you miss something when you request articles!
+        console.log(error);
+    };
+})();
 ```
 
 > You can run multiple Orb Weavers at the same time, but keep in mind it's CPU and RAM usage.
