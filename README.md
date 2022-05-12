@@ -28,7 +28,9 @@ Orb Weaver is an all-in-one tool to extract Google News RSS, get source links an
 
 ## Installation:
 
-> Package not uploaded yet. You can download the distribution and import it.
+```powershell
+    npm install @ivanbogaeb/orbweaver
+```
 
 ## Usage:
 
