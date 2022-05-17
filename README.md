@@ -149,6 +149,7 @@ console.log(weaver.getLangCountryMap()); // Returns all the available languages 
 - Gathering the original URL or Image is a slow process, you have to be patient.
 
 ## Changelog:
+- 17 May 2022 - Readme update - Version 1.1.1
 - 12 May 2022 - Bug fixes and improvements - Version 1.1.0
 - 11 May 2022 - First Release - Version 1.0.0
 - **[Read more...](./changelog.md)**
